@@ -39,7 +39,7 @@ bedtools bamtofastq -i $FILE"_R2.bam" -fq $FILE"_R2.fastq"
 done 
 
 ## repear file, this will allow melt to run correctly
-$REPAIR/repair.sh in=$FILE"_R1.fastq" in2=$FILE"R2.fastq" out=elephant_repair.fastq outs=out_singleton.out
+$REPAIR/repair.sh in=$FILE"_R1.fastq" in2=$FILE"R2.fastq" out=$FILE"_elephant_repair.fastq" outs=$FILE"_out_singleton.out"
 
 #############
 ###align the repaired reads to the reference genome
@@ -50,7 +50,7 @@ module load intel bwa
 
 bwa mem -M -p \
 $REF_HOME/Lafr.Chromosomes.v2.fasta \
-elephant_repaired.fastq \
+$FILE"_elephant_repaired.fastq" \
 -t 30 \
 > elephant_aln_pe.sam
 
